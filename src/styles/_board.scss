@@ -1,0 +1,69 @@
+@import './vars';
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.board {
+    display: grid;
+    position: relative;
+    grid-template-rows: repeat($grid-size, $cell-size);
+    grid-template-columns: repeat($grid-size, $cell-size);
+    
+    background-color: #ccc;
+    border-radius: $border-radius;
+    padding: $cell-gap;
+    gap: $cell-gap;
+
+    font-size: 7.5vmin;
+
+    &__cell {
+        background-color: #aaa;
+        border-radius: $border-radius;
+    }
+
+    &__tile {
+        $x: 2;
+        $y: 0;
+        $bgc-lightness: 80%;
+        $text-lightness: 20%;
+
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: $cell-size;
+        height: $cell-size;
+
+        border-radius: $border-radius;
+        
+        top: calc($y * ($cell-size + $cell-gap) + $cell-gap);
+        left: calc($x * ($cell-size + $cell-gap) + $cell-gap);
+        
+        font-weight: bold;
+        background-color: hsl(200, 50%, $bgc-lightness);
+        color: hsl(200, 25%, $text-lightness);
+        
+        animation: show .3s ease-in-out;
+        transition: .2s ease-in-out;
+    }
+}
+
+@keyframes show { 
+    0% {
+        opacity: .5;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
